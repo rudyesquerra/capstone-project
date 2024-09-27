@@ -6,6 +6,9 @@ const BookingForm = (props) => {
     const [times, setTimes] = useState("");
     const [guests, setGuests] = useState("");
     const [occasion, setOccasion] = useState("");
+
+    const isButtonEnabled = date !== '' && times !== '' && guests !== '' && occasion !== '';
+    console.log(isButtonEnabled)
       
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -39,13 +42,14 @@ const BookingForm = (props) => {
                         {/* for number of guests */}
                         <div>
                         <label htmlFor='book-guests'>Number of Guests</label>
-                        <input id='book-guests' min='1' value={guests} onChange={(e) => setGuests(e.target.value)}/>
+                        <input id='book-guests' min='1' value={guests} onChange={(e) => setGuests(e.target.value)} required/>
                         </div>
 
                         {/* Ocation field */}
                         <div>
                             <label htmlFor='book-occasion'>Occasion</label>
                             <select id='book-occasion' key={occasion} value={occasion} onChange={e => setOccasion(e.target.value)}>
+                                <option>Choose an option</option>
                                 <option>Birthday</option>
                                 <option>Anniversary</option>
                             </select>
@@ -53,7 +57,7 @@ const BookingForm = (props) => {
 
                         {/* submit button */}
                         <div className='btnReceive'>
-                            <input aria-label='On Click' type='submit' value={"Make Your Reservation"}/>
+                            <input aria-label='On Click' type='submit' value={"Make Your Reservation"} disabled={!isButtonEnabled}/>
                         </div>
                     </fieldset>
                 </form>
